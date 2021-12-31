@@ -25,7 +25,7 @@ function cloneDeep(target) {
     } else if (cloneType(target) === 'Array') {
         result = []
     } else {
-        result = target
+      return  result = target
     }
     for (const key in target) {
         let item = target[key]
