@@ -6,7 +6,9 @@
 //     },
 //     d: () => {
 //         return 'd'
-//     }
+//     },
+//     e: new RegExp(/^\s+|\s$/g),
+//     f: new Date()
 // }
 
 // console.log(obj, 'default data')
@@ -20,12 +22,14 @@ function cloneType(target) {
 
 function cloneDeep(target) {
     let result;
+    if (cloneType(target) === 'RegExp') return new RegExp(target);
+    if (cloneType(target) === 'Date') return new Date(target);
     if (cloneType(target) === 'Object') {
         result = {}
     } else if (cloneType(target) === 'Array') {
         result = []
     } else {
-      return  result = target
+        return result = target
     }
     for (const key in target) {
         let item = target[key]
@@ -37,7 +41,7 @@ function cloneDeep(target) {
     }
     return result;
 }
-// let newData = cloneDeep(obj)
 export default cloneDeep
+// let newData = cloneDeep(obj)
 // console.log(newData, newData === obj, 'custom clone')
 // newData.b[1] = 5
