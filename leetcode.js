@@ -22,3 +22,20 @@ var longestCommonPrefix = function (strs) {
         }
     }
 };
+// 2022. 将一维数组转变成二维数组(一遍过)
+/**
+ * @param {number[]} original
+ * @param {number} m
+ * @param {number} n
+ * @return {number[][]}
+ */
+var construct2DArray = function (original, m, n) {
+
+    if (original.length !== m * n || original.length <= 0 || m <= 0 || n <= 0) return [];
+    let arr = [];
+    for (let i = 0; i < m; i++) {
+        let item = original.slice(i === 0 ? i : n * i, n * (i + 1))
+        arr.push(item)
+    }
+    return arr
+};
