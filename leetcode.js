@@ -39,3 +39,40 @@ var construct2DArray = function (original, m, n) {
     }
     return arr
 };
+//1185  一周中的第几天
+/**
+ * @param {number} day
+ * @param {number} month
+ * @param {number} year
+ * @return {string}
+ */
+var dayOfTheWeek = function (day, month, year) {
+    let time = new Date(`${year}-${month}-${day}`);
+    let timeWeek = time.getDay();
+    let result = ''
+    switch (timeWeek) {
+        case 1:
+            result = 'Monday';
+            break;
+        case 2:
+            result = 'Tuesday';
+            break;
+        case 3:
+            result = 'Wednesday';
+            break;
+        case 4:
+            result = 'Thursday';
+            break;
+        case 5:
+            result = 'Friday';
+            break;
+        case 6:
+            result = 'Saturday';
+            break;
+        default:
+            result = 'Sunday';
+            break;
+
+    }
+    return result
+};
