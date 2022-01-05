@@ -76,3 +76,64 @@ var dayOfTheWeek = function (day, month, year) {
     }
     return result
 };
+
+// 1576 替换所有的问号
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var modifyString = function (s) {
+    let arr = s.split(""),
+        alphabet = ['a', 'b', 'c', 'd', "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
+            "r", "s", "t", "u", "v", "w", "x", "y", "z"
+        ],
+        index;
+
+    if (arr.includes(isTrue) < 0) return s;
+    while (arr.findIndex(isTrue) >= 0) {
+        index = arr.findIndex(isTrue)
+        if (index == 0) {
+            let strNum = alphabet.findIndex(isNext)
+            arr[index] = alphabet[strNum == 25 ? 0 : strNum + 1]
+        } else {
+            // console.log(index,arr);
+            let next = alphabet.findIndex(isNext)
+            let pre = alphabet.findIndex(isPre)
+            arr[index] = alphabet[iso(next, pre)]
+            console.log(iso(next, pre), arr);
+        }
+    }
+    return arr.join("")
+
+    function isTrue(item) {
+        return item == '?';
+
+    }
+
+    function iso(next, pre) {
+        if ((pre === 0 && next === 25) || (next === 0 && pre === 25)) {
+            return 24
+        } else if ((pre === 1 && next === 25) || (next === 1 && pre === 25)) {
+            return 24
+        } else if (next === pre) {
+            return next === 0 || next === 25 ? 24 : next + 1
+        } else {
+            let a = -1 < (next + 1 === pre ? next - 1 : next + 1) && (next + 1 === pre ? next - 1 : next +
+                    1) <= 25,
+                b = -1 < (pre + 1 === next ? pre - 1 : pre + 1) && (pre + 1 === next ? pre - 1 : pre + 1) <=
+                25;
+
+            console.log((next + 1 === pre ? next - 1 : next + 1), (pre + 1 === next ? pre - 1 : pre + 1));
+            return a ? (next + 1 === pre ? next - 1 : next + 1) : (pre + 1 === next ? pre - 1 : pre + 1)
+
+        }
+    }
+
+    function isNext(item) {
+        return item == arr[index + 1]
+    }
+
+    function isPre(item) {
+        return item == arr[index - 1]
+    }
+};
