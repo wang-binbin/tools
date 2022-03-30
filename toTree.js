@@ -2,8 +2,8 @@
  * @param {data} 需要转变的数据
  * @param {config} id、pid设置 需结合data中的对应字段
  */
-export default function tree(data, config) {
-  const { id = "id", pid = "pid" } = config || {};
+export default function tree(data = [], config = {}) {
+  const { id = "id", pid = "pid" } = config;
   // 存放最高层级数据
   const result = [];
   // 存放所有子集
@@ -47,7 +47,7 @@ export default function tree(data, config) {
  * @returns tree
  */
 function toTree(data = [], config = {}) {
-  const { id = "id", pid = "pid" } = config || {};
+  const { id = "id", pid = "pid" } = config;
 
   const newData = JSON.parse(JSON.stringify(data));
 
