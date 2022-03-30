@@ -4,12 +4,16 @@
  */
 export default function tree(data, config) {
   const { id = "id", pid = "pid" } = config || {};
-  // 获取全部id
-  const ids = data.map((i) => i[id]);
   // 存放最高层级数据
   const result = [];
   // 存放所有子集
   const childrenNode = [];
+  // 获取全部id
+  const ids = data.map((i) => i[id]);
+  //是否为数组
+  if (!Array.isArray(data)) {
+    return result;
+  }
   // 分离数据  最高级和所有子集
   data.forEach((i) => (ids.includes(i[pid]) ? childrenNode : result).push(i));
   // 浅拷贝一份数据去做操作
@@ -34,6 +38,40 @@ export default function tree(data, config) {
   // 将结果推出
   return result;
 }
+
+/**
+ * 上面写法太复杂，下面为简写
+ *
+ * @param {*} data 需要转变的数据
+ * @param {*} config id、pid设置 需结合data中的对应字段
+ * @returns tree
+ */
+function toTree(data = [], config = {}) {
+  const { id = "id", pid = "pid" } = config || {};
+
+  const newData = JSON.parse(JSON.stringify(data));
+
+  const result = [];
+
+  const allNodeMap = {};
+
+  if (!Array.isArray(newData)) {
+    return result;
+  }
+
+  newData.forEach((item) => {
+    delete item.children;
+    allNodeMap[item[id]] = item;
+  });
+
+  newData.forEach((item) => {
+    const parent = allNodeMap[item[pid]];
+    parent.children ? parent.children.push(item) : (parent.children = [item]);
+  });
+
+  return result;
+}
+
 // 测试数据
 const data = [
   {
