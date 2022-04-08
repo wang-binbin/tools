@@ -48,22 +48,22 @@ export default function tree(data = [], config = {}) {
  */
 function toTree(data = [], config = {}) {
   const { id = "id", pid = "pid" } = config;
-
+  // 浅拷贝精髓所在
   const newData = JSON.parse(JSON.stringify(data));
-
+  // 存放结果
   const result = [];
-
+  // 存放平铺数据
   const allNodeMap = {};
-
+  // 不是Array不处理
   if (!Array.isArray(newData)) {
     return result;
   }
-
+  // 清除原有的children，以及平铺数据
   newData.forEach((item) => {
     delete item.children;
     allNodeMap[item[id]] = item;
   });
-
+  // 核心代码
   newData.forEach((item) => {
     const parent = allNodeMap[item[pid]];
     parent.children ? parent.children.push(item) : (parent.children = [item]);
